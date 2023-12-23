@@ -22,20 +22,20 @@ def add_noise(img, prob):
     return output
 
 
-def img_arr_from_dir(img_directory, idx, noise=False):
+def img_arr_from_dir(img_directory, prob):
     img = np.array(Image.open(img_directory).convert("L"))
 
-    if noise:
-        img_noise = add_noise(img, 0.02)
+    if prob != 0:
+        img_noise = add_noise(img, prob)
         img_out = Image.fromarray(img_noise).convert("L")
-        img_out.save('SnP_%s.bmp'%(idx))
+        img_out.save('adding_SnP_%d%s%d.bmp'%(img.shape[1], 'x', img.shape[0]))
         #img_out.show()
         return img_noise
 
     return img
 
 
-def cpu_median(img, filter_size, idx):
+def cpu_median(img, filter_size):
     index = filter_size // 2
     out = np.pad(img, pad_width=index, mode='edge')
     start = time.perf_counter()
@@ -44,12 +44,12 @@ def cpu_median(img, filter_size, idx):
             out[i][j] = np.median(img[i - index:i + index + 1, j - index:j + index + 1])
     end = time.perf_counter()
     img_out = Image.fromarray(out[index:-index, index:-index]).convert("L")
-    img_out.save('cpu_median_%s.bmp'%(idx))
+    img_out.save('cpu_median_%s%d%s%d.bmp'%('cpu', img.shape[1], 'x', img.shape[0]))
     #img_out.show()
     return end - start
 
 
-def cuda_median(img, filter_size, idx):
+def cuda_median(img, filter_size):
     kernel = cp.RawKernel(r'''
         extern "C" 
         __global__ void m_filter(unsigned char* input, unsigned char* output, int width, int height) {
@@ -110,42 +110,41 @@ def cuda_median(img, filter_size, idx):
     result_gpu = np.array(result_gpu.get()).reshape(len(img_new), len(img_new[0]))
 
     img_out = Image.fromarray(result_gpu[index:-index, index:-index]).convert("L")
-    img_out.save('gpu_median_%s.bmp'%(idx))
+    img_out.save('gpu_median_%s%d%s%d.bmp'%('gpu', img.shape[1], 'x', img.shape[0]))
     #img_out.show()
     return end - start
 
 
 if __name__ == '__main__':
 
+    noise_prob = 0.02
+
     images_wout_noise = ["wout0.bmp", "wout1.bmp", "wout2.bmp"]
     images_w_noise = ["w0.bmp", "w0.bmp", "w1.bmp", "w2.bmp"]
     res_list = []
-    temp = -1
     for image in images_w_noise:
-        img_arr = img_arr_from_dir(image, temp)
+        img_arr = img_arr_from_dir(image, 0)
         res_dict = {"resolution": (img_arr.shape[1],img_arr.shape[0]),
-                    "prenoise": "True"}
+                    "adding SnP": 0}
 
-        res_dict["gpu"] = cuda_median(img_arr, 3, temp)
-        res_dict["cpu"] = cpu_median(img_arr, 3, temp)
+        res_dict["gpu"] = cuda_median(img_arr, 3)
+        res_dict["cpu"] = cpu_median(img_arr, 3)
 
         res_dict["acc (gpu>cpu)"] = res_dict["cpu"] / res_dict["gpu"]
 
         res_list.append(res_dict)
-        temp += 1
 
     for image in images_wout_noise:
-        img_arr = img_arr_from_dir(image, temp, True)
+        img_arr = img_arr_from_dir(image, noise_prob)
         res_dict = {"resolution": (img_arr.shape[1],img_arr.shape[0]),
-                    "prenoise": "False"}
+                    "adding SnP": noise_prob}
 
-        res_dict["gpu"] = cuda_median(img_arr, 3, temp)
-        res_dict["cpu"] = cpu_median(img_arr, 3, temp)
+        res_dict["gpu"] = cuda_median(img_arr, 3)
+        res_dict["cpu"] = cpu_median(img_arr, 3)
 
         res_dict["acc (gpu>cpu)"] = res_dict["cpu"] / res_dict["gpu"]
 
         res_list.append(res_dict)
-        temp += 1
 
     df1 = pd.DataFrame.from_records(res_list)
     print(df1.to_markdown(index=False))
