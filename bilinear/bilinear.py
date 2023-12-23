@@ -39,9 +39,6 @@ def gpu_bilinear(img):
 
     threadsperblock = (8, 8)
     blockspergrid = (math.ceil(img.shape[0] * 2 / threadsperblock[0]), math.ceil(img.shape[1] * 2 / threadsperblock[1]))
-    start = cuda.event()
-    end = cuda.event()
-
     img_arr_gpu = cuda.to_device(img)
     result_gpu = cuda.to_device(cp.zeros((img.shape[0] * 2, img.shape[1] * 2), dtype=cp.uint8))
 
