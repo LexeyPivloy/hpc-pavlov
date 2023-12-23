@@ -4,6 +4,9 @@
 
 [vectorsum](vectorsum/)
 
+[SnP](salt_and_pepe/)
+
+[bilinear](bilinear/)
 <h3><pre>gpu: geforce 1050ti
 cpu: pentium g4560</pre></h3>
 
