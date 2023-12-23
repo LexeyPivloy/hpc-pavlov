@@ -22,12 +22,12 @@
 
 | resolution   | input                                                                                  | add noise                                                                                              | cpu                                                                                                       | gpu                                                                                                       |
 |--------------|----------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------|
-| (240, 150)   | ![](input/w0.bmp)    |                                                                                                        | ![](output/cpu_median_cpu240x150.bmp)   | ![](output/cpu_median_cpu240x150.bmp)   |
-| (320, 428)   | ![](input/w1.bmp)    |                                                                                                        | ![](output/cpu_median_cpu320x428.bmp)   | ![](output/cpu_median_cpu320x428.bmp)   |
-| (512, 512)   | ![](input/w2.bmp)    |                                                                                                        | ![](output/cpu_median_cpu515x512.bmp)   | ![](output/cpu_median_cpu515x512.bmp)   |
-| (300, 224)   | ![](input/wout0.bmp) | ![](output/adding_SnP_300x224.bmp)   | ![](output/cpu_median_cpu300x224.bmp)   | ![](output/cpu_median_cpu300x224.bmp)   |
-| (700, 700)   | ![](input/wout1.bmp) | ![](output/adding_SnP_700x700.bmp)   | ![](output/cpu_median_cpu700x700.bmp)   | ![](output/cpu_median_cpu700x700.bmp)   |
-| (2048, 1534) | ![](input/wout2.bmp) | ![](output/adding_SnP_2048x1534.bmp) | ![](output/cpu_median_cpu2048x1534.bmp) | ![](output/cpu_median_cpu2048x1534.bmp) |
+| (240, 150)   | ![](input/w0.bmp)    |                                                                                                        | ![](output/cpu_median_cpu240x150.bmp)   | ![](output/gpu_median_gpu240x150.bmp)   |
+| (320, 428)   | ![](input/w1.bmp)    |                                                                                                        | ![](output/cpu_median_cpu320x428.bmp)   | ![](output/gpu_median_gpu320x428.bmp)   |
+| (512, 512)   | ![](input/w2.bmp)    |                                                                                                        | ![](output/cpu_median_cpu512x512.bmp)   | ![](output/gpu_median_gpu512x512.bmp)   |
+| (300, 224)   | ![](input/wout0.bmp) | ![](output/adding_SnP_300x224.bmp)   | ![](output/cpu_median_cpu300x224.bmp)   | ![](output/gpu_median_gpu300x224.bmp)   |
+| (700, 700)   | ![](input/wout1.bmp) | ![](output/adding_SnP_700x700.bmp)   | ![](output/cpu_median_cpu700x700.bmp)   | ![](output/gpu_median_gpu700x700.bmp)   |
+| (2048, 1534) | ![](input/wout2.bmp) | ![](output/adding_SnP_2048x1534.bmp) | ![](output/cpu_median_cpu2048x1534.bmp) | ![](output/gpu_median_gpu2048x1534.bmp) |
 
 
 <h3><i>Вывод</i>: распараллеливание на gpu отлично справляется с поставленной задачей </h3>
