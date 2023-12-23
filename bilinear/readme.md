@@ -20,12 +20,12 @@
 
 | resolution inp | input              | cpu                                  | gpu                                  |
 |----------------|--------------------|--------------------------------------|--------------------------------------|
-| (100, 100)     | ![](input/100.bmp) | ![](output/bileanear_cpu100x100.bmp) | ![](output/bileanear_gpu100x100.bmp) |
-| (200, 200)     | ![](input/200.bmp) | ![](output/bileanear_cpu200x200.bmp) | ![](output/bileanear_gpu200x200.bmp) |
-| (240, 150)     | ![](input/240.bmp) | ![](output/bileanear_cpu240x150.bmp) | ![](output/bileanear_gpu240x150.bmp) |
-| (300, 224)     | ![](input/300.bmp) | ![](output/bileanear_cpu300x224.bmp) | ![](output/bileanear_gpu300x224.bmp) |
-| (320, 428)     | ![](input/320.bmp) | ![](output/bileanear_cpu320x428.bmp) | ![](output/bileanear_gpu320x428.bmp) |
-|  (600, 600)    | ![](input/600.bmp) | ![](output/bileanear_cpu600x600.bmp) | ![](output/bileanear_gpu600x600.bmp) |
+| (100, 100)     | ![](input/100.bmp) | ![](output/bilenear_cpu100x100.bmp) | ![](output/bilenear_gpu100x100.bmp) |
+| (200, 200)     | ![](input/200.bmp) | ![](output/bilenear_cpu200x200.bmp) | ![](output/bilenear_gpu200x200.bmp) |
+| (240, 150)     | ![](input/240.bmp) | ![](output/bilenear_cpu240x150.bmp) | ![](output/bilenear_gpu240x150.bmp) |
+| (300, 224)     | ![](input/300.bmp) | ![](output/bilenear_cpu300x224.bmp) | ![](output/bilenear_gpu300x224.bmp) |
+| (320, 428)     | ![](input/320.bmp) | ![](output/bilenear_cpu320x428.bmp) | ![](output/bilenear_gpu320x428.bmp) |
+|  (600, 600)    | ![](input/600.bmp) | ![](output/bilenear_cpu600x600.bmp) | ![](output/bilenear_gpu600x600.bmp) |
 
 
 <h3><i>Вывод</i>: распараллеливание на gpu отлично справляется с поставленной задачей </h3>
